@@ -1,6 +1,10 @@
 {
   "name": "graphql-practice",
   "packageManager": "yarn@4.6.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "yarn tsx src/index.ts"
+  },
   "devDependencies": {
     "@types/node": "^22.13.5",
     "tsx": "^4.19.3",
