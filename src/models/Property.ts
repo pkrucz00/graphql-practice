@@ -20,11 +20,7 @@ builder.queryField("properties", (t) =>
   t.prismaField({
     type: ["Property"],
     resolve: async (
-      queryFromInfo,
-      _rootCertificates,
-      _argsToArgsConfig,
-      _contextCacheSymbol,
-      _info,
+      queryFromInfo
     ) => {
       return prisma.property.findMany({ ...queryFromInfo });
     },
