@@ -346,6 +346,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pothos/core@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@pothos/core@npm:4.4.0"
+  peerDependencies:
+    graphql: ">=16.6.0"
+  checksum: 10c0/2fc3ab7b541cc6045269a570a82a0a680d62b333dd38776e8cebc8eb4c66da7a409044b37499e4eca27633c81c06614439dd6312aaa4569331ac01c215f34da4
+  languageName: node
+  linkType: hard
+
 "@prisma/client@npm:6.4.1":
   version: 6.4.1
   resolution: "@prisma/client@npm:6.4.1"
@@ -846,15 +855,28 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "graphql-practice@workspace:."
   dependencies:
+    "@pothos/core": "npm:^4.4.0"
     "@prisma/client": "npm:6.4.1"
     "@types/node": "npm:^22.13.5"
     graphql: "npm:^16.10.0"
+    graphql-scalars: "npm:^1.24.1"
     graphql-yoga: "npm:^5.12.0"
     prisma: "npm:^6.4.1"
     tsx: "npm:^4.19.3"
     typescript: "npm:^5.7.3"
   languageName: unknown
   linkType: soft
+
+"graphql-scalars@npm:^1.24.1":
+  version: 1.24.1
+  resolution: "graphql-scalars@npm:1.24.1"
+  dependencies:
+    tslib: "npm:^2.5.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 10c0/08f9d4f3e87e15b32a279f55d6550d2f095c9d133387f1224d6c213d88ace508f8f4c0ae7862982e35eb80fba15e94dfc3cd67501f6948aef96942d3128f01f9
+  languageName: node
+  linkType: hard
 
 "graphql-yoga@npm:^5.12.0":
   version: 5.12.0
