@@ -1,4 +1,4 @@
-import { builder } from "../builder";
+import { builder } from "../../../builder";
 
 builder.prismaObject("WeatherData", {
   fields: (t) => ({

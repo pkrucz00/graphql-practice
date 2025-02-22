@@ -1,5 +1,4 @@
-import { builder } from "../builder";
-import { prisma } from "../db";
+import { builder } from "../../../builder";
 
 builder.prismaObject("Property", {
   fields: (t) => ({
@@ -15,12 +14,3 @@ builder.prismaObject("Property", {
     }),
   }),
 });
-
-builder.queryField("properties", (t) =>
-  t.prismaField({
-    type: ["Property"],
-    resolve: async (queryFromInfo) => {
-      return prisma.property.findMany({ ...queryFromInfo });
-    },
-  }),
-);
