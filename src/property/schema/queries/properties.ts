@@ -4,10 +4,10 @@ import { prisma } from "../../../db";
 builder.queryField("properties", (t) =>
   t.prismaField({
     type: ["Property"],
-    resolve: queryProperties,
+    resolve: getProperties,
   }),
 );
 
-export const queryProperties = async () => {
+export const getProperties = async () => {
   return prisma.property.findMany();
 };
