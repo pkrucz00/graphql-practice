@@ -4,10 +4,12 @@
   "scripts": {
     "build": "yarn install && yarn prisma generate",
     "dev": "yarn tsx src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "yarn prettier --write ."
   },
   "devDependencies": {
     "@types/node": "^22.13.5",
+    "prettier": "3.5.2",
     "prisma": "^6.4.1",
     "tsx": "^4.19.3",
     "typescript": "^5.7.3"
