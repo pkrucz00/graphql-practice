@@ -355,6 +355,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pothos/plugin-prisma@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@pothos/plugin-prisma@npm:4.4.0"
+  dependencies:
+    "@prisma/generator-helper": "npm:^6.0.0"
+  peerDependencies:
+    "@pothos/core": "*"
+    "@prisma/client": "*"
+    graphql: ">=16.6.0"
+    typescript: ">=4.7.2"
+  bin:
+    prisma-pothos-types: bin/generator.js
+  checksum: 10c0/e493bd67c182d94de04c859875a2618bc5121456b6c7bb4f9e208855fecc7e8cba8e3acde5c8c0e7aeaffeb6763bab62fa1e3b1eb54c6cae1f8581e7686e0753
+  languageName: node
+  linkType: hard
+
 "@prisma/client@npm:6.4.1":
   version: 6.4.1
   resolution: "@prisma/client@npm:6.4.1"
@@ -404,6 +420,15 @@ __metadata:
     "@prisma/engines-version": "npm:6.4.0-29.a9055b89e58b4b5bfb59600785423b1db3d0e75d"
     "@prisma/get-platform": "npm:6.4.1"
   checksum: 10c0/950acd87c55b9da3286a40b3ee46fa38a037c3d4a8a5c1ac2ef4eb942d9b18ba82277e8dec84beeb4ce11fc031680e8cb43bcd9f60a64685bc94f4c5fd81bb50
+  languageName: node
+  linkType: hard
+
+"@prisma/generator-helper@npm:^6.0.0":
+  version: 6.4.1
+  resolution: "@prisma/generator-helper@npm:6.4.1"
+  dependencies:
+    "@prisma/debug": "npm:6.4.1"
+  checksum: 10c0/4db9317d832d9ee71ab265442ec05ae9aaca1b3c9c98f9de6fc6842c4b7ecf146150b278557dda9e955f6415e32e9f149fae968f1fc0c275c19b8267a8de0ce8
   languageName: node
   linkType: hard
 
@@ -856,6 +881,7 @@ __metadata:
   resolution: "graphql-practice@workspace:."
   dependencies:
     "@pothos/core": "npm:^4.4.0"
+    "@pothos/plugin-prisma": "npm:^4.4.0"
     "@prisma/client": "npm:6.4.1"
     "@types/node": "npm:^22.13.5"
     graphql: "npm:^16.10.0"

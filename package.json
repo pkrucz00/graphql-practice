@@ -2,8 +2,9 @@
   "name": "graphql-practice",
   "packageManager": "yarn@4.6.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "yarn tsx src/index.ts"
+    "build": "yarn install && yarn prisma generate",
+    "dev": "yarn tsx src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@types/node": "^22.13.5",
@@ -13,6 +14,7 @@
   },
   "dependencies": {
     "@pothos/core": "^4.4.0",
+    "@pothos/plugin-prisma": "^4.4.0",
     "@prisma/client": "6.4.1",
     "graphql": "^16.10.0",
     "graphql-scalars": "^1.24.1",
