@@ -11,7 +11,8 @@ type BuilderSchema = {
             Input: Date;
             Output: Date
         }
-    }
+    };
+    PrismaTypes: PrismaTypes;
 };
 
 export const builder = new SchemaBuilder<BuilderSchema>({
@@ -21,4 +22,7 @@ export const builder = new SchemaBuilder<BuilderSchema>({
     }
 });
 
+// TODO add zip code regex validation
 builder.addScalarType('Date', DateResolver, {});
+
+builder.queryType({});

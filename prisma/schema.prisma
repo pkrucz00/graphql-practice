@@ -25,13 +25,13 @@ model Property {
   zip           String
   weatherData   WeatherData?
   coordinates   Coordinates?
-  createdAt     DateTime
+  createdAt     DateTime     @default(now())
   coordinatesId Int?
 }
 
 model WeatherData {
   id                  Int      @id @default(autoincrement())
-  observationTime     String
+  observationTime     DateTime @default(now())
   temperature         Int
   weatherCode         Int
   weatherIcons        String[]
@@ -55,5 +55,5 @@ model Coordinates {
   latitude   Float
   longitude  Float
   propertyId Int      @unique
-  Property   Property @relation(fields: [propertyId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id])
 }
