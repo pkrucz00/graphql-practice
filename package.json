@@ -4,9 +4,10 @@
   "scripts": {
     "build": "yarn install && yarn prisma generate",
     "dev": "yarn tsx src/index.ts",
-    "lint": "yarn eslint --ext .ts(x) . --fix && yarn run prettier",
+    "lint": "yarn eslint --ext .ts . --fix && yarn run prettier",
     "prettier": "yarn prettier --write .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -14,6 +15,8 @@
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.1",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "prettier": "3.5.2",
     "prisma": "^6.4.1",
     "tsx": "^4.19.3",
@@ -30,5 +33,10 @@
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn run lint"
+    ]
   }
 }
