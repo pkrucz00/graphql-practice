@@ -6,6 +6,8 @@
     "dev": "yarn tsx src/index.ts",
     "lint": "yarn eslint . --fix && yarn run prettier --write .",
     "test": "yarn vitest",
+    "test:unit": "vitest -c ./vitest.config.unit.ts",
+    "test:integration": "vitest -c ./vitest.config.integration.ts",
     "prepare": "husky"
   },
   "devDependencies": {
