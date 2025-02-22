@@ -2,7 +2,7 @@
   "name": "graphql-practice",
   "packageManager": "yarn@4.6.0",
   "scripts": {
-    "build": "yarn install && yarn prisma generate",
+    "build": "yarn prisma generate",
     "dev": "yarn tsx src/index.ts",
     "lint": "yarn eslint --ext .ts . --fix && yarn run prettier",
     "prettier": "yarn prettier --write .",
