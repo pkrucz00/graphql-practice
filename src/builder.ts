@@ -4,7 +4,7 @@ import PrismaPlugin from "@pothos/plugin-prisma";
 import type PrismaTypes from "@pothos/plugin-prisma/generated";
 import { prisma } from "./db";
 
-type BuilderSchema = {
+export type BuilderSchema = {
   Scalars: {
     Date: {
       Input: Date;
@@ -21,7 +21,7 @@ export const builder = new SchemaBuilder<BuilderSchema>({
   },
 });
 
+builder.queryType({});
+
 // TODO add zip code regex validation
 builder.addScalarType("Date", DateResolver, {});
-
-builder.queryType({});

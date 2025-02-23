@@ -3,13 +3,16 @@
   "packageManager": "yarn@4.6.0",
   "scripts": {
     "build": "yarn prisma generate",
-    "dev": "yarn tsx src/index.ts",
+    "dev": "yarn tsx watch src/index.ts",
     "lint": "yarn eslint . --fix && yarn run prettier --write .",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "yarn vitest",
+    "test:unit": "vitest -c ./vitest.config.unit.ts",
+    "test:integration": "./scripts/prepare-integration-test-db.sh && vitest -c ./vitest.config.integration.ts",
     "prepare": "husky"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@graphql-tools/executor-http": "^1.2.7",
     "@types/node": "^22.13.5",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.1",
@@ -20,7 +23,9 @@
     "prisma": "^6.4.1",
     "tsx": "^4.19.3",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.1"
+    "typescript-eslint": "^8.24.1",
+    "vitest": "^3.0.6",
+    "vitest-mock-extended": "^3.0.1"
   },
   "dependencies": {
     "@pothos/core": "^4.4.0",
