@@ -9,14 +9,33 @@ const sortOrder = builder.enumType("SortOrder", {
   values: sortOrderValues,
 });
 
+type GetPropertiesArgs = {
+  sortByCreationDate?: SortOrder | null;
+  filterBy?: {
+    city?: string | null;
+    state?: string | null;
+    zip?: string | null;
+  };
+};
+
 builder.queryField("properties", (t) =>
   t.prismaField({
     type: ["Property"],
     args: {
       sortByCreationDate: t.arg({ type: sortOrder }),
+      city: t.arg({ type: "String" }),
+      state: t.arg({ type: "String" }),
+      zip: t.arg({ type: "String" }),
     },
     resolve: async (_query, _root, args) =>
-      getProperties(args.sortByCreationDate),
+      getProperties({
+        sortByCreationDate: args.sortByCreationDate,
+        filterBy: {
+          city: args.city,
+          state: args.state,
+          zip: args.zip,
+        },
+      }),
   }),
 );
 
@@ -30,12 +49,24 @@ const sortProperties = (
   );
 };
 
-export const getProperties = async (sortByCreationDate?: SortOrder | null) => {
+export const getProperties = async ({
+  sortByCreationDate,
+  filterBy,
+}: GetPropertiesArgs) => {
   const shouldSort =
     sortByCreationDate === "asc" || sortByCreationDate === "desc";
-  const allProperties = await prisma.property.findMany();
+
+  const filterQuery = {
+    city: filterBy?.city || undefined,
+    state: filterBy?.state || undefined,
+    zip: filterBy?.zip || undefined,
+  };
+
+  const filteredProperties = await prisma.property.findMany({
+    where: filterQuery,
+  });
 
   return shouldSort
-    ? sortProperties(allProperties, sortByCreationDate!)
-    : allProperties;
+    ? sortProperties(filteredProperties, sortByCreationDate!)
+    : filteredProperties;
 };
