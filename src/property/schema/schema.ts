@@ -5,5 +5,6 @@ import "./models/WeatherData";
 import "./models/Coordinates";
 
 import "./queries/properties";
+import "./queries/property";
 
 export const schema = builder.toSchema();

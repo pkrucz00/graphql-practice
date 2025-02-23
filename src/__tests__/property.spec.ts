@@ -41,9 +41,12 @@ describe("property", () => {
   it("returns property if it exists", async () => {
     const property = await prisma.property.create(propertyToAdd);
 
+    console.log("property", property);
+    console.log("typeof property.id", typeof property.id);
+
     const result = await executor({
       document: parse(`
-                query getProperty($id: ID!) {
+                query getProperty($id: Int!) {
                     property(id: $id) {
                         street
                         city
@@ -78,6 +81,26 @@ describe("property", () => {
             longitude: -89.650148,
           },
         },
+      },
+    });
+  });
+
+  it("returns null if property does not exist", async () => {
+    const result = await executor({
+      document: parse(`
+                query getProperty($id: Int!) {
+                    property(id: $id) {
+                        street
+                    }
+                }
+            `),
+      variables: {
+        id: 1,
+      },
+    });
+    expect(result).toEqual({
+      data: {
+        property: null,
       },
     });
   });
