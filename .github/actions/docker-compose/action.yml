@@ -1,7 +1,7 @@
-name: 'Docker-Compose Setup'
-description: 'Sets up docker-compose'
+name: "Docker-Compose Setup"
+description: "Sets up docker-compose"
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Download Docker-Compose plugin
       shell: bash

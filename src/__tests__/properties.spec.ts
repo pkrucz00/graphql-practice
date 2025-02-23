@@ -106,7 +106,7 @@ describe("properties", () => {
     const result = await executor({
       document: queryWithSort,
       variables: {
-        sortByCreationDate: "ASC",
+        sortByCreationDate: "asc",
       },
     });
 
