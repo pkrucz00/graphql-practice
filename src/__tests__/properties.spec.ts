@@ -91,7 +91,7 @@ describe("properties", () => {
     });
   });
 
-  test("Sort a list of properties by createion date", async () => {
+  test("Sort a list of properties by creation date", async () => {
     const queryWithSort = parse(`
       query($sortByCreationDate: SortOrder) {
         properties(sortByCreationDate: $sortByCreationDate) {
