@@ -25,7 +25,7 @@ const properties: Property[] = [
   {
     street: "321 Side St",
     city: "Dusty",
-    state: "CT",
+    state: "CA",
     zip: "21378",
     weatherData: {
       temperature: 65,
@@ -60,7 +60,7 @@ describe("getProperties", () => {
   it("should get an empty list if no properties are sourced", async () => {
     prisma.property.findMany.mockResolvedValue([]);
 
-    const result = await getProperties();
+    const result = await getProperties({});
     expect(result).toEqual([]);
     expect(prisma.property.findMany).toHaveBeenCalled();
   });
@@ -68,7 +68,7 @@ describe("getProperties", () => {
   it("should get a list of properties", async () => {
     prisma.property.findMany.mockResolvedValue([...properties]);
 
-    const result = await getProperties();
+    const result = await getProperties({});
     expect(result).toEqual(properties);
     expect(prisma.property.findMany).toHaveBeenCalled();
   });
@@ -77,7 +77,7 @@ describe("getProperties", () => {
     prisma.property.findMany.mockResolvedValue([...properties]);
     const expectedResults = [properties[0], properties[2], properties[1]];
 
-    const result = await getProperties("asc");
+    const result = await getProperties({ sortByCreationDate: "asc" });
     expect(result).toEqual(expectedResults);
     expect(prisma.property.findMany).toHaveBeenCalled();
   });
@@ -88,8 +88,44 @@ describe("getProperties", () => {
 
     console.log(expectedResults);
 
-    const result = await getProperties("desc");
+    const result = await getProperties({ sortByCreationDate: "desc" });
     expect(result).toEqual(expectedResults);
     expect(prisma.property.findMany).toHaveBeenCalled();
+  });
+
+  it("should filter properties by city", async () => {
+    const city = "Dusty";
+    const expectedResults = [properties[1]];
+    prisma.property.findMany.mockResolvedValue(expectedResults);
+
+    const result = await getProperties({ filterBy: { city } });
+    expect(result).toEqual(expectedResults);
+    expect(prisma.property.findMany).toHaveBeenCalledWith({
+      where: { city },
+    });
+  });
+
+  it("should filter properties by state", async () => {
+    const state = "IL";
+    const expectedResults = [properties[0]];
+    prisma.property.findMany.mockResolvedValue(expectedResults);
+
+    const result = await getProperties({ filterBy: { state } });
+    expect(result).toEqual(expectedResults);
+    expect(prisma.property.findMany).toHaveBeenCalledWith({
+      where: { state },
+    });
+  });
+
+  it("should filter properties by zip", async () => {
+    const zip = "12345";
+    const expectedResults = [properties[2]];
+    prisma.property.findMany.mockResolvedValue(expectedResults);
+
+    const result = await getProperties({ filterBy: { zip } });
+    expect(result).toEqual(expectedResults);
+    expect(prisma.property.findMany).toHaveBeenCalledWith({
+      where: { zip },
+    });
   });
 });
