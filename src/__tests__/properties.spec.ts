@@ -90,4 +90,43 @@ describe("properties", () => {
       },
     });
   });
+
+  test("Sort a list of properties by createion date", async () => {
+    const queryWithSort = parse(`
+      query($sortByCreationDate: SortOrder) {
+        properties(sortByCreationDate: $sortByCreationDate) {
+          street
+          createdAt
+        }
+      }
+    `);
+
+    await createTestProperties();
+
+    const result = await executor({
+      document: queryWithSort,
+      variables: {
+        sortByCreationDate: "ASC",
+      },
+    });
+
+    expect(result).toEqual({
+      data: {
+        properties: [
+          {
+            street: "123 Main St",
+            createdAt: "2021-09-01",
+          },
+          {
+            street: "213 Diamond St",
+            createdAt: "2022-01-01",
+          },
+          {
+            street: "321 Side St",
+            createdAt: "2022-03-01",
+          },
+        ],
+      },
+    });
+  });
 });
