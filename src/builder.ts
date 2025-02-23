@@ -22,6 +22,7 @@ export const builder = new SchemaBuilder<BuilderSchema>({
 });
 
 builder.queryType({});
+builder.mutationType({});
 
 // TODO add zip code regex validation
 builder.addScalarType("Date", DateResolver, {});

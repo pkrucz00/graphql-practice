@@ -41,9 +41,6 @@ describe("property", () => {
   it("returns property if it exists", async () => {
     const property = await prisma.property.create(propertyToAdd);
 
-    console.log("property", property);
-    console.log("typeof property.id", typeof property.id);
-
     const result = await executor({
       document: parse(`
                 query getProperty($id: Int!) {

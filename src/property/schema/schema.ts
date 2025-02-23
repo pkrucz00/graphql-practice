@@ -7,4 +7,6 @@ import "./models/Coordinates";
 import "./queries/properties";
 import "./queries/property";
 
+import "./mutations/property";
+
 export const schema = builder.toSchema();
