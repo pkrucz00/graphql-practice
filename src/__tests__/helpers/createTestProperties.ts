@@ -38,7 +38,7 @@ const createTestProperties = async () => {
     data: {
       street: "321 Side St",
       city: "Dusty",
-      state: "CT",
+      state: "CA",
       zip: "21378",
       weatherData: {
         create: {

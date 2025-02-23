@@ -25,7 +25,7 @@ const properties: Property[] = [
   {
     street: "321 Side St",
     city: "Dusty",
-    state: "CT",
+    state: "CA",
     zip: "21378",
     weatherData: {
       temperature: 65,

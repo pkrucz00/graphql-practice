@@ -59,7 +59,7 @@ describe("properties", () => {
           {
             street: "321 Side St",
             city: "Dusty",
-            state: "CT",
+            state: "CA",
             zip: "21378",
             weatherData: {
               temperature: 70,
@@ -124,6 +124,103 @@ describe("properties", () => {
           {
             street: "321 Side St",
             createdAt: "2022-03-01",
+          },
+        ],
+      },
+    });
+  });
+
+  test("Filter a list of properties by city", async () => {
+    const queryWithFilter = parse(`
+      query($city: String) {
+        properties(city: $city) {
+          street
+          city
+        }
+      }
+    `);
+
+    await createTestProperties();
+
+    const result = await executor({
+      document: queryWithFilter,
+      variables: {
+        city: "Dusty",
+      },
+    });
+
+    expect(result).toEqual({
+      data: {
+        properties: [
+          {
+            street: "321 Side St",
+            city: "Dusty",
+          },
+        ],
+      },
+    });
+  });
+
+  test("Filter a list of properties by state", async () => {
+    const queryWithFilter = parse(`
+      query($state: String) {
+        properties(state: $state) {
+          street
+          state
+        }
+      }
+    `);
+
+    await createTestProperties();
+
+    const result = await executor({
+      document: queryWithFilter,
+      variables: {
+        state: "CA",
+      },
+    });
+
+    expect(result).toEqual({
+      data: {
+        properties: [
+          {
+            street: "321 Side St",
+            state: "CA",
+          },
+          {
+            street: "213 Diamond St",
+            state: "CA",
+          },
+        ],
+      },
+    });
+  });
+
+  test("Filter a list of properties by zip code", async () => {
+    const queryWithFilter = parse(`
+      query($zip: String) {
+        properties(zip: $zip) {
+          street
+          zip
+        }
+      }
+    `);
+
+    await createTestProperties();
+
+    const result = await executor({
+      document: queryWithFilter,
+      variables: {
+        zip: "21378",
+      },
+    });
+
+    expect(result).toEqual({
+      data: {
+        properties: [
+          {
+            street: "321 Side St",
+            zip: "21378",
           },
         ],
       },
