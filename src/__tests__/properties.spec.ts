@@ -1,10 +1,11 @@
 import { describe } from "node:test";
 import { expect, test } from "vitest";
-import { executor } from "./setup";
+import { executor } from "./helpers/setup";
 import { parse } from "graphql";
 
 describe("properties", () => {
   test("getProperties", async () => {
+    console.log("ENV TEST DATABASE URL", process.env.DATABASE_URL);
     const query = parse(`
       query {
         properties {

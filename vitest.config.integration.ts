@@ -1,4 +1,7 @@
+import { loadEnvFile } from "process";
 import { defineConfig } from "vitest/config";
+
+loadEnvFile(".env.test");
 
 export default defineConfig({
   test: {
@@ -6,5 +9,6 @@ export default defineConfig({
     poolOptions: {
       max: 1,
     },
+    setupFiles: ["./src/__tests__/helpers/setup.ts"],
   },
 });
