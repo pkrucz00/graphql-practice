@@ -6,8 +6,13 @@ loadEnvFile(".env.test");
 export default defineConfig({
   test: {
     include: ["src/**/*.spec.ts"],
+    maxConcurrency: 1,
+    pool: "threads",
     poolOptions: {
-      max: 1,
+      threads: {
+        minThreads: 1,
+        maxThreads: 1,
+      },
     },
     setupFiles: ["./src/__tests__/helpers/setup.ts"],
   },
