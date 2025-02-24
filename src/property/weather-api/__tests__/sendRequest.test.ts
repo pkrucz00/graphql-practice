@@ -20,7 +20,7 @@ describe("sendRequest", () => {
     // then
     expect(result).toEqual(response);
     expect(axiosSpy).toHaveBeenCalledWith(
-      `${TEST_URL}/current?appid=${TEST_KEY}`,
+      `${TEST_URL}/current?access_key=${TEST_KEY}`,
       {
         params: {
           query: location,

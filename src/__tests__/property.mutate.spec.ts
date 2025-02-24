@@ -131,6 +131,9 @@ describe("createProperty", () => {
     const weatherApiSpy = vitest.spyOn(weatherAPI, "queryWeather");
     weatherApiSpy.mockRejectedValue(new Error("Weather API failed"));
 
+    const consoleErrorSpy = vitest.spyOn(console, "error");
+    consoleErrorSpy.mockImplementation(() => {});
+
     // when
     const result = await executor({
       document: mutation,
@@ -149,5 +152,6 @@ describe("createProperty", () => {
       zip: "62701",
       street: "123 Main St",
     });
+    expect(consoleErrorSpy).toHaveBeenCalled();
   });
 });

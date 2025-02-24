@@ -37,13 +37,16 @@ const sendRequest = async (
   location: string,
 ): Promise<WeatherstackApiResponse> => {
   try {
-    const url = `${process.env.WEATHER_API_URL}/current?appid=${process.env.WEATHER_API_KEY}`;
+    const url = `${process.env.WEATHER_API_URL}/current?access_key=${process.env.WEATHER_API_KEY}`;
+    console.log("Sending request to", url);
+    console.log("Location", location);
 
     const response = await axios.get<WeatherstackApiResponse>(url, {
       params: {
         query: location,
       },
     });
+    console.log("Got response", response.data);
     return response.data;
   } catch (error) {
     throw new Error(`Error querying weather: ${error}`);
