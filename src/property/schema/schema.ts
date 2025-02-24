@@ -7,6 +7,7 @@ import "./models/Coordinates";
 import "./queries/properties";
 import "./queries/property";
 
-import "./mutations/property";
+import "./mutations/createProperty";
+import "./mutations/deleteProperty";
 
 export const schema = builder.toSchema();

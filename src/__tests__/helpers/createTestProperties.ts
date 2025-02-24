@@ -1,6 +1,7 @@
+import { Property } from "@prisma/client";
 import { prisma } from "./prisma";
 
-const createTestProperties = async () => {
+const createTestProperties = async (): Promise<Property[]> => {
   await prisma.property.create({
     data: {
       street: "123 Main St",
@@ -101,6 +102,9 @@ const createTestProperties = async () => {
       createdAt: "2022-01-01T12:00:00Z",
     },
   });
+
+  // assuming that database was empty before this function was called
+  return await prisma.property.findMany();
 };
 
 export default createTestProperties;
