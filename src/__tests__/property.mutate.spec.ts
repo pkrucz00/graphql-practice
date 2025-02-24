@@ -4,6 +4,8 @@ import { executor } from "./helpers/setup";
 import * as weatherAPI from "../property/weather-api";
 import { parse } from "graphql";
 import { Property } from "@prisma/client";
+import createTestProperties from "./helpers/createTestProperties";
+import { prisma } from "./helpers/prisma";
 
 vi.mock("../../../weather-api");
 
@@ -154,4 +156,79 @@ describe("createProperty", () => {
     });
     expect(consoleErrorSpy).toHaveBeenCalled();
   });
+});
+
+describe("deleteProperty", () => {
+  it("should delete a property", async () => {
+    // given
+    const [propertyToDelete, ...restOfProperties] =
+      await createTestProperties();
+    const idToDelete = propertyToDelete.id;
+
+    const mutation = parse(`
+      mutation deleteProperty($id: Int!) {
+            deleteProperty(id: $id) {
+                id
+            }
+        }`);
+    const variables = {
+      id: idToDelete,
+    };
+
+    // when
+    const result = await executor({
+      document: mutation,
+      variables,
+    });
+
+    //then
+    vi.waitFor(() => {
+      expect(result).toEqual({
+        data: {
+          deleteProperty: {
+            id: idToDelete,
+          },
+        },
+      });
+    });
+
+    const propertiesAfterDelete = await prisma.property.findMany();
+    vi.waitFor(() => {
+      expect(propertiesAfterDelete).toEqual(restOfProperties);
+    });
+  });
+});
+
+it("should return null if the property does not exist", async () => {
+  // given
+  const properties = await createTestProperties();
+  const idToDelete = properties.length + 1;
+
+  const mutation = parse(`
+      mutation deleteProperty($id: Int!) {
+            deleteProperty(id: $id) {
+                id
+            }
+        }`);
+  const variables = {
+    id: idToDelete,
+  };
+
+  const consoleErrorSpy = vi
+    .spyOn(console, "error")
+    .mockImplementation(() => {});
+
+  // when
+  const result = await executor({
+    document: mutation,
+    variables,
+  });
+
+  // then
+  expect(result).toEqual({
+    data: {
+      deleteProperty: null,
+    },
+  });
+  expect(consoleErrorSpy).toHaveBeenCalled();
 });

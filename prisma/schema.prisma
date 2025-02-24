@@ -47,7 +47,7 @@ model WeatherData {
   uvIndex             Int
   visibility          Int
   propertyId          Int      @unique
-  property            Property @relation(fields: [propertyId], references: [id])
+  property            Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 }
 
 model Coordinates {
@@ -55,5 +55,5 @@ model Coordinates {
   latitude   Float
   longitude  Float
   propertyId Int      @unique
-  property   Property @relation(fields: [propertyId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 }
