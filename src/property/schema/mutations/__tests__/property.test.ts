@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, vitest } from "vitest";
+import { beforeEach, describe, expect, it, vi, vitest } from "vitest";
 import { prisma } from "../../../../__mocks__/db";
 import * as weatherAPI from "../../../weather-api";
 
@@ -9,6 +9,10 @@ vi.mock("../../../../db");
 vi.mock("../../../weather-api");
 
 describe("createProperty", () => {
+  beforeEach(() => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+  });
+
   it("should create a property", async () => {
     // given
     const propertyInput = {
@@ -127,6 +131,7 @@ describe("createProperty", () => {
       street: "123 Main St",
     });
     expect(prisma.property.create).not.toHaveBeenCalled();
+    expect(console.error).toHaveBeenCalled();
   });
 
   it("should return null if the property is not in the USA", async () => {
@@ -166,6 +171,7 @@ describe("createProperty", () => {
       street: "123 Main St",
     });
     expect(prisma.property.create).not.toHaveBeenCalled();
+    expect(console.error).toHaveBeenCalled();
   });
 
   it("should return null if the creation fails", async () => {
@@ -229,5 +235,6 @@ describe("createProperty", () => {
         },
       },
     });
+    expect(console.error).toHaveBeenCalled();
   });
 });

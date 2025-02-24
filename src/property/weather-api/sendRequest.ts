@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// documentation: https://weatherstack.com/documentation
+// we omit the "request" parameter as we do not use it
 export type WeatherstackApiResponse = {
   location: {
     name: string;
@@ -31,13 +33,15 @@ export type WeatherstackApiResponse = {
   };
 };
 
-const sendRequest = async (query: string): Promise<WeatherstackApiResponse> => {
+const sendRequest = async (
+  location: string,
+): Promise<WeatherstackApiResponse> => {
   try {
     const url = `${process.env.WEATHER_API_URL}/current?appid=${process.env.WEATHER_API_KEY}`;
 
     const response = await axios.get<WeatherstackApiResponse>(url, {
       params: {
-        query,
+        query: location,
       },
     });
     return response.data;

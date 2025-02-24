@@ -86,8 +86,6 @@ describe("getProperties", () => {
     prisma.property.findMany.mockResolvedValue([...properties]);
     const expectedResults = [properties[1], properties[2], properties[0]];
 
-    console.log(expectedResults);
-
     const result = await getProperties({ sortByCreationDate: "desc" });
     expect(result).toEqual(expectedResults);
     expect(prisma.property.findMany).toHaveBeenCalled();

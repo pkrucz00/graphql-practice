@@ -5,7 +5,7 @@ import * as weatherAPI from "../property/weather-api";
 import { parse } from "graphql";
 import { Property } from "@prisma/client";
 
-vi.mock("../../../weather-api"); // TODO change to the fetching library (e.g. axios)
+vi.mock("../../../weather-api");
 
 type ResponseData = {
   data: {

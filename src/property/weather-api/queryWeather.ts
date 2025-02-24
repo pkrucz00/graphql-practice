@@ -13,9 +13,9 @@ const mapTime = (timeString: string): Date => {
 
   const hours24h = isPm && !isMidnight ? hours + 12 : isNoon ? 0 : hours;
 
-  today.setHours(hours24h);
-  today.setMinutes(minutes);
-  today.setSeconds(0);
+  today.setUTCHours(hours24h);
+  today.setUTCMinutes(minutes);
+  today.setUTCSeconds(0);
 
   return today;
 };
@@ -25,6 +25,11 @@ const mapWeatherstackResponse = (
 ): WeatherApiReturn => {
   const current = response.current;
   const location = response.location;
+
+  const isInUsa =
+    location.country.includes("United States") ||
+    location.country.includes("U.S.A.") ||
+    location.country.includes("US");
 
   return {
     weatherData: {
@@ -47,7 +52,7 @@ const mapWeatherstackResponse = (
     localization: {
       latitude: Number(location.lat),
       longitude: Number(location.lon),
-      isInUsa: location.country.includes("United States"),
+      isInUsa,
     },
   };
 };
@@ -59,12 +64,15 @@ const queryWeather = async ({
   street,
 }: Address): Promise<WeatherApiReturn> => {
   const formatQuery = `${street}, ${city}, ${state}, ${zip}`;
-  console.log(`Querying weather for ${formatQuery}`);
 
-  const weatherApiResponse: WeatherstackApiResponse =
-    await sendRequest(formatQuery);
+  try {
+    const weatherApiResponse: WeatherstackApiResponse =
+      await sendRequest(formatQuery);
 
-  return mapWeatherstackResponse(weatherApiResponse);
+    return mapWeatherstackResponse(weatherApiResponse);
+  } catch (error) {
+    throw new Error(`Error querying weather: ${error}`);
+  }
 };
 
 export default queryWeather;
