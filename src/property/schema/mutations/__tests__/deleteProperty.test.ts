@@ -11,6 +11,7 @@ describe("deleteProperty", () => {
     const propertyId = 1;
     const property = propertyResponse;
 
+    prisma.property.findUnique.mockResolvedValue(property);
     prisma.property.delete.mockResolvedValue(property);
 
     // when
@@ -18,6 +19,9 @@ describe("deleteProperty", () => {
 
     // then
     expect(result).toEqual(property);
+    expect(prisma.property.findUnique).toHaveBeenCalledWith({
+      where: { id: propertyId },
+    });
     expect(prisma.property.delete).toHaveBeenCalledWith({
       where: { id: propertyId },
     });
@@ -30,6 +34,7 @@ describe("deleteProperty", () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
       .mockImplementation(() => {});
+    prisma.property.findUnique.mockResolvedValue(null);
     prisma.property.delete.mockRejectedValue(new Error("Property not found"));
 
     // when
@@ -37,7 +42,10 @@ describe("deleteProperty", () => {
 
     // then
     expect(result).toBeNull();
-    expect(prisma.property.delete).toHaveBeenCalledWith({
+    expect(prisma.property.findUnique).toHaveBeenCalledWith({
+      where: { id: propertyId },
+    });
+    expect(prisma.property.delete).not.toHaveBeenCalledWith({
       where: { id: propertyId },
     });
     expect(consoleErrorSpy).toHaveBeenCalled();

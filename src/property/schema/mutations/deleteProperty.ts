@@ -16,8 +16,16 @@ builder.mutationField("deleteProperty", (t) =>
 );
 
 export const deleteProperty = async (id: number): Promise<Property | null> => {
+  const property = await prisma.property.findUnique({
+    where: { id },
+  });
+  if (!property) {
+    console.error("Property not found");
+    return null;
+  }
+
   console.log("Deleting property with id", id);
-  return await prisma.property
+  await prisma.property
     .delete({
       where: { id },
     })
@@ -25,4 +33,6 @@ export const deleteProperty = async (id: number): Promise<Property | null> => {
       console.error("Error when deleting a property", error);
       return null;
     });
+
+  return property;
 };
