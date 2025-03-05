@@ -6,24 +6,34 @@ import { deleteProperty } from "../deleteProperty";
 vi.mock("../../../../db");
 
 describe("deleteProperty", () => {
+  const dummyQuery = {
+    include: {
+      weatherData: true,
+      coordinates: true,
+    },
+    select: {
+      id: true,
+      street: true,
+      city: true,
+      state: true,
+      zip: true,
+    },
+  };
   it("should delete a property if it exists in the database", async () => {
     // given
     const propertyId = 1;
     const property = propertyResponse;
 
-    prisma.property.findUnique.mockResolvedValue(property);
     prisma.property.delete.mockResolvedValue(property);
 
     // when
-    const result = await deleteProperty(propertyId);
+    const result = await deleteProperty(propertyId, dummyQuery);
 
     // then
     expect(result).toEqual(property);
-    expect(prisma.property.findUnique).toHaveBeenCalledWith({
-      where: { id: propertyId },
-    });
     expect(prisma.property.delete).toHaveBeenCalledWith({
       where: { id: propertyId },
+      ...dummyQuery,
     });
   });
 
@@ -34,19 +44,16 @@ describe("deleteProperty", () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
       .mockImplementation(() => {});
-    prisma.property.findUnique.mockResolvedValue(null);
     prisma.property.delete.mockRejectedValue(new Error("Property not found"));
 
     // when
-    const result = await deleteProperty(propertyId);
+    const result = await deleteProperty(propertyId, dummyQuery);
 
     // then
     expect(result).toBeNull();
-    expect(prisma.property.findUnique).toHaveBeenCalledWith({
+    expect(prisma.property.delete).toHaveBeenCalledWith({
       where: { id: propertyId },
-    });
-    expect(prisma.property.delete).not.toHaveBeenCalledWith({
-      where: { id: propertyId },
+      ...dummyQuery,
     });
     expect(consoleErrorSpy).toHaveBeenCalled();
   });
