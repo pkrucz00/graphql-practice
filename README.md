@@ -1,5 +1,7 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+
 <a id="readme-top"></a>
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -7,8 +9,6 @@
 *** Don't forget to give the project a star!
 *** Thanks again! Now go create something AMAZING! :D
 -->
-
-
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -18,12 +18,11 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -45,8 +44,6 @@
     <a href="https://github.com/pkrucz00/graphql-practice/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -73,9 +70,8 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 [![Screenshot of GraphQL Yoga Explorer][product-screenshot]](https://graphql-practice-e886.onrender.com/)
@@ -90,50 +86,49 @@ Feel free to explore the demo, report any bugs, or request new features to help 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 ### Built With
 
-* ⟁ [Prisma](prisma.io) 
-* 🐘 [Postgres](https://www.postgresql.org/) 
-* 🧘 [Graphql Yoga](https://the-guild.dev/graphql/yoga-server)
-* 🌱 [Pothos](https://pothos-graphql.dev/)
-* ✅ [Vitest](https://vitest.dev/)
-* 𝓐 [Axios](https://axios-http.com/docs/intro)
-* 🧶 [Yarn v4](https://yarnpkg.com/blog/release/4.0)
+- ⟁ [Prisma](prisma.io)
+- 🐘 [Postgres](https://www.postgresql.org/)
+- 🧘 [Graphql Yoga](https://the-guild.dev/graphql/yoga-server)
+- 🌱 [Pothos](https://pothos-graphql.dev/)
+- ✅ [Vitest](https://vitest.dev/)
+- 𝓐 [Axios](https://axios-http.com/docs/intro)
+- 🧶 [Yarn v4](https://yarnpkg.com/blog/release/4.0)
 
-### Deployed with 
+### Deployed with
 
-* 🚄 [Railway](https://railway.com/) 
-* 🔳 [Render](https://render.com/) 
+- 🚄 [Railway](https://railway.com/)
+- 🔳 [Render](https://render.com/)
 
 ### Dev helpers
 
-* ✍️ [EsLint](https://eslint.org/docs/latest/use/getting-started)
-* ✨ [Prettier](https://prettier.io/)
-* 🐶 [Husky](https://typicode.github.io/husky/get-started.html)
-* 🙅💩 [lint-staged](https://github.com/lint-staged/lint-staged)
+- ✍️ [EsLint](https://eslint.org/docs/latest/use/getting-started)
+- ✨ [Prettier](https://prettier.io/)
+- 🐶 [Husky](https://typicode.github.io/husky/get-started.html)
+- 🙅💩 [lint-staged](https://github.com/lint-staged/lint-staged)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
-For a TL;DR usage of this service you can see the GraphQL Explorer available on Render [here](https://graphql-practice-e886.onrender.com/). 
+For a TL;DR usage of this service you can see the GraphQL Explorer available on Render [here](https://graphql-practice-e886.onrender.com/).
 
 If you rather use it yourself, follow the below instructions.
 
 ### Prerequisites
 
-The service calls  so get and prepare your access key.
+The service calls so get and prepare your access key.
 
-   ```js
-    API_KEY = 'YOUR API';
-   ```
+```js
+API_KEY = "YOUR API";
+```
 
 This is an example of how to list things you need to use the software and how to install them.
-* yarn
+
+- yarn
   ```sh
   corepack enable
   ```
@@ -150,6 +145,7 @@ This is an example of how to list things you need to use the software and how to
    yarn install
    ```
 4. Create your `.env` file in the root folder, based on `.env.example`
+
    ```bash
    export WEATHER_API_KEY = ...
    export DATABASE_URL = ...
@@ -161,29 +157,30 @@ This is an example of how to list things you need to use the software and how to
    git remote -v # confirm the changes
    ```
 6. To host your own database, either use the `docker-compose.yml` file or create your own and set env variables accordingly
-    ```sh
-    docker compose up -d
-    ```
+   ```sh
+   docker compose up -d
+   ```
 7. Migrate and seed your database:
-    ```sh
-    prisma db push
-    prisma db seed
-    ```
+
+   ```sh
+   prisma db push
+   prisma db seed
+   ```
 
 8. Build and run the project locally
-    ```sh
-      yarn run build
-      yarn run dev
-    ```
+   ```sh
+     yarn run build
+     yarn run dev
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 Example query:
+
 ```graphql
 query AllProperties {
   properties {
@@ -219,6 +216,7 @@ query AllProperties {
 ```
 
 Example mutation:
+
 ```graphql
 mutation addSmallProperty($property: PropertyInput!) {
   createProperty(property: $property) {
@@ -253,9 +251,8 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - [x] Property CRUD
@@ -270,7 +267,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 - Testability
   - [x] Unit tests
   - [x] Integration tests
-  - [x] CI/CD using GH Actions 
+  - [x] CI/CD using GH Actions
   - [ ] Contract testing
 - Deployability
   - [x] Postgres image
@@ -280,11 +277,9 @@ Use this space to show useful examples of how a project can be used. Additional 
   - [ ] Docker compose with profiles
   - [ ] Prisma Pulse
 
-
 See the [open issues](https://github.com/pkrucz00/graphql-practice/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ### Top contributors:
 
@@ -292,18 +287,16 @@ See the [open issues](https://github.com/pkrucz00/graphql-practice/issues) for a
   <img src="https://contrib.rocks/image?repo=pkrucz00/graphql-practice" alt="contrib.rocks image" />
 </a>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
+
 ## Contact
 
 Paweł Kruczkiewicz - [@pkrucz](https://www.linkedin.com/in/pkrucz/) - pawel.kruczkiewicz@gmail.com
@@ -312,10 +305,9 @@ Project Link: [https://github.com/pkrucz00/graphql-practice](https://github.com/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [stars-shield]: https://img.shields.io/github/stars/pkrucz00/graphql-practice.svg?style=for-the-badge
 [stars-url]: https://github.com/pkrucz00/graphql-practice/stargazers
 [issues-shield]: https://img.shields.io/github/issues/pkrucz00/graphql-practice.svg?style=for-the-badge

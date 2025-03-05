@@ -1,4 +1,4 @@
-import { Property } from "@prisma/client";
+import { Prisma, Property } from "@prisma/client";
 import { builder } from "../../../builder";
 import { prisma } from "../../../db";
 
@@ -9,30 +9,23 @@ builder.mutationField("deleteProperty", (t) =>
       id: t.arg.int({ required: true }),
     },
     nullable: true,
-    resolve: async (_query, _root, args) => {
-      return await deleteProperty(args.id);
+    resolve: async (query, _root, args) => {
+      return await deleteProperty(args.id, query);
     },
   }),
 );
 
-export const deleteProperty = async (id: number): Promise<Property | null> => {
-  const property = await prisma.property.findUnique({
-    where: { id },
-  });
-  if (!property) {
-    console.error("Property not found");
-    return null;
-  }
-
-  console.log("Deleting property with id", id);
-  await prisma.property
+export const deleteProperty = async (
+  id: number,
+  query: { include?: Prisma.PropertyInclude; select?: Prisma.PropertySelect },
+): Promise<Property | null> => {
+  return await prisma.property
     .delete({
       where: { id },
+      ...query,
     })
     .catch((error) => {
-      console.error("Error when deleting a property", error);
+      console.error("Error deleting property:", error);
       return null;
     });
-
-  return property;
 };
